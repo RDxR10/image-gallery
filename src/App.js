@@ -7,6 +7,8 @@ import images from './images';
 
 function App() {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [uploadedImages, setUploadedImages] = useState([]);
+  const [uploadedImagesModalOpen, setUploadedImagesModalOpen] = useState(false);
 
   const handleImageClick = (image) => {
     setSelectedImage(image);
@@ -32,9 +34,24 @@ function App() {
     });
   };
 
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setUploadedImages((prevImages) => [...prevImages, imageUrl]);
+    }
+  };
+
+  const handleCloseUploadedImagesModal = () => {
+    setUploadedImagesModalOpen(false);
+  };
+
   return (
     <div className="App">
-      <h1>Image Gallery</h1>
+      <div className="header">
+        <h1>Image Gallery</h1>
+        <button onClick={handleDownloadImages}>Download Random Set</button>
+      </div>
       <ImageGrid onImageClick={handleImageClick} />
       {selectedImage && (
         <div className="modal-overlay" onClick={handleCloseModal}>
@@ -43,7 +60,33 @@ function App() {
           </div>
         </div>
       )}
-      <button onClick={handleDownloadImages}>Download Random Set</button>
+      <div className="button-container">
+        <input type="file" accept="image/jpeg, image/png" onChange={handleImageUpload} />
+      </div>
+      {uploadedImagesModalOpen && (
+        <div className="modal-overlay" onClick={handleCloseUploadedImagesModal}>
+          <div className="modal uploaded-images-modal">
+            {uploadedImages.map((image, index) => (
+              <div
+                key={index}
+                className="uploaded-image"
+                style={{ backgroundImage: `url(${image})` }}
+                onClick={() => setSelectedImage(image)}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+      <div className="uploaded-image-container">
+        {uploadedImages.map((image, index) => (
+          <div
+            key={index}
+            className="image-item uploaded-image"
+            style={{ backgroundImage: `url(${image})`, width: '200px', height: '200px' }}
+            onClick={() => setSelectedImage(image)}
+          />
+        ))}
+      </div>
     </div>
   );
 }
