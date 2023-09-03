@@ -46,6 +46,12 @@ function App() {
     setUploadedImagesModalOpen(false);
   };
 
+  const handleDeleteImage = (index) => {
+    const updatedImages = [...uploadedImages];
+    updatedImages.splice(index, 1); 
+    setUploadedImages(updatedImages); 
+  };
+
   return (
     <div className="App">
       <div className="header">
@@ -62,21 +68,10 @@ function App() {
       )}
       <div className="button-container">
         <input type="file" accept="image/jpeg, image/png" onChange={handleImageUpload} />
+        {uploadedImages.length > 0 && (
+          <button onClick={() => handleDeleteImage(uploadedImages.length - 1)}>Delete</button>
+        )}
       </div>
-      {uploadedImagesModalOpen && (
-        <div className="modal-overlay" onClick={handleCloseUploadedImagesModal}>
-          <div className="modal uploaded-images-modal">
-            {uploadedImages.map((image, index) => (
-              <div
-                key={index}
-                className="uploaded-image"
-                style={{ backgroundImage: `url(${image})` }}
-                onClick={() => setSelectedImage(image)}
-              />
-            ))}
-          </div>
-        </div>
-      )}
       <div className="uploaded-image-container">
         {uploadedImages.map((image, index) => (
           <div
