@@ -15,6 +15,11 @@
   background-size: cover;
   background-position: center;
   cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.image-item:hover {
+  transform: translate(-5px, -5px); /* Adjust the values for the desired effect */
 }
 
 .modal-overlay {
