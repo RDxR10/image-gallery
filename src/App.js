@@ -9,6 +9,7 @@ function App() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [uploadedImages, setUploadedImages] = useState([]);
   const [uploadedImagesModalOpen, setUploadedImagesModalOpen] = useState(false);
+  const [upvotedImages, setUpvotedImages] = useState([]);
 
   const handleImageClick = (image) => {
     setSelectedImage(image);
@@ -52,13 +53,21 @@ function App() {
     setUploadedImages(updatedImages); 
   };
 
+  const toggleUpvote = (image) => {
+    if (upvotedImages.includes(image)) {
+      setUpvotedImages(upvotedImages.filter((upvotedImage) => upvotedImage !== image));
+    } else {
+      setUpvotedImages([...upvotedImages, image]);
+    }
+  };
+
   return (
     <div className="App">
       <div className="header">
         <h1>Image Gallery</h1>
         <button onClick={handleDownloadImages}>Download Random Set</button>
       </div>
-      <ImageGrid onImageClick={handleImageClick} />
+      <ImageGrid onImageClick={handleImageClick} upvotedImages={upvotedImages} toggleUpvote={toggleUpvote}/>
       {selectedImage && (
         <div className="modal-overlay" onClick={handleCloseModal}>
           <div className="modal">
