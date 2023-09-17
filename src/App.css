@@ -19,7 +19,7 @@
 }
 
 .image-item:hover {
-  transform: translate(-5px, -5px);
+  transform: translate(-5px, -5px); 
 }
 
 .modal-overlay {
@@ -71,7 +71,7 @@
   bottom: 10px;
   right: 10px;
   background-color: transparent;
-  border: 2px solid teal; /* Add a border */
+  border: 2px solid teal; /* Add a teal border */
   color: teal;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
@@ -81,10 +81,11 @@
 }
 
 .upvote-button.upvoted {
-  background-color: teal; /* Fill with teal color when upvoted */
+  background-color: teal; 
   color: white;
 }
+
 .image-item.upvoted {
-  border: 2px solid teal; /* Add a border to upvoted images */
+  border: 2px solid teal; 
   transform: translate(-5px, -5px);
 }
