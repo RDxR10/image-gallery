@@ -19,7 +19,7 @@
 }
 
 .image-item:hover {
-  transform: translate(-5px, -5px); /* Adjust the values for the desired effect */
+  transform: translate(-5px, -5px);
 }
 
 .modal-overlay {
@@ -64,4 +64,27 @@
 .uploaded-image {
   background-size: cover;
   background-position: center;
+}
+
+.upvote-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: 2px solid teal; /* Add a border */
+  color: teal;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  padding: 5px 10px;
+  border-radius: 5px;
+  outline: none;
+}
+
+.upvote-button.upvoted {
+  background-color: teal; /* Fill with teal color when upvoted */
+  color: white;
+}
+.image-item.upvoted {
+  border: 2px solid teal; /* Add a border to upvoted images */
+  transform: translate(-5px, -5px);
 }
