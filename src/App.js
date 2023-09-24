@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import ImageGrid from './ImageGrid';
 import JSZip from 'jszip';
@@ -10,6 +10,7 @@ function App() {
   const [uploadedImages, setUploadedImages] = useState([]);
   const [uploadedImagesModalOpen, setUploadedImagesModalOpen] = useState(false);
   const [upvotedImages, setUpvotedImages] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const handleImageClick = (image) => {
     setSelectedImage(image);
@@ -61,8 +62,23 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+
+
   return (
     <div className="App">
+            {loading && (
+                <div className="loading-spinner-overlay">
+                        <div className="loading-spinner"></div>
+                </div>
+        )}
       <div className="header">
         <h1>Image Gallery</h1>
         <button onClick={handleDownloadImages}>Download Random Set</button>
