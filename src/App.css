@@ -74,7 +74,7 @@
   border: 2px solid teal; /* Add a teal border */
   color: teal;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.4s ease-in-out;
   padding: 5px 10px;
   border-radius: 5px;
   outline: none;
